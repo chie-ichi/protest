@@ -25,6 +25,17 @@
                     <li class="info__tag-item">{{ $restaurant->getCategory() }}</li>
                 </ul>
                 <p class="info__description">{{ $restaurant->description }}</p>
+                @auth
+                <div class="review-form__wrap">
+                    <form action="/review" class="review-form" method="get">
+                        <input type="hidden" name="user_id" class="review-form__hidden" value="{{ Auth::user()->id }}">
+                        <input type="hidden" name="restaurant_id" class="review-form__hidden" value="{{ $restaurant->id }}">
+                        <div class="review-form__button-wrap">
+                            <button class="review-form__button" type="submit">口コミを投稿する</button>
+                        </div>
+                    </form>
+                </div>
+                @endauth
             </div>
             <div class="reservation">
                 <div class="reservation-form__wrap">

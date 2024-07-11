@@ -37,3 +37,46 @@ if($('select[name=\"number\"]').length) {
         $('#number').text($('option:selected', this).val() + '人');
     });
 }
+
+/* upload image */
+$('#uploadArea').on('dragover', function (event) {
+	event.preventDefault();
+	this.style.backgroundColor = '#80ff80';
+});
+
+$('#uploadArea').on('dragleave', function () {
+	this.style.backgroundColor = '';
+});
+
+$('#uploadArea').on('drop', function (event) {
+	event.preventDefault();
+	this.style.backgroundColor = '';
+    var files = event.originalEvent.dataTransfer.files;
+    if (files.length > 0) {
+        $('#fileInput').prop('files', files);
+        $('#fileInput').trigger('change');
+    }
+});
+
+$('#fileInput').on('change', function () {
+	$('#fileName').html(this.files[0].name);
+});
+
+/* count text */
+$(function() {
+    const $target = $('#textarea-count-target');
+    const $result = $('#textarea-count-result');
+
+    function countText() {
+        const len = $target.val().length;
+        $result.text(len);
+    }
+
+    // ページ読み込み直後に文字数をカウント
+    countText();
+
+    // inputイベントが発生したときに文字数をカウント
+    $target.on('input', () => {
+        countText();
+    });
+});
