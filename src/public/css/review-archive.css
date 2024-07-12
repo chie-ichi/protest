@@ -9,7 +9,7 @@
     font-size: 30px;
     margin: 0 0 1em;
 }
-@media screen and (max-width: 767px){
+@media screen and (max-width: 768px){
     .reviews__title{
         font-size: 24px;
     }
@@ -17,6 +17,11 @@
 .reviews-list__item{
     border-bottom: 1px solid #ccc;
     padding: 30px 0;
+}
+@media screen and (max-width: 768px){
+    .reviews-list__item{
+        font-size: 14px;
+    }
 }
 .reviews-list__user{
     display: flex;
@@ -32,7 +37,7 @@
     padding: 0 0.3em 0 0;
     line-height: 1;
 }
-@media screen and (max-width: 767px){
+@media screen and (max-width: 768px){
     .reviews-list__stars{
         font-size: 22px;
     }
@@ -71,6 +76,11 @@
     border: 1px solid var(--accent-color);
     transition: .3s all ease;
 }
+@media screen and (max-width: 768px){
+    .back-button__link{
+        font-size: 16px;
+    }
+}
 .back-button__link:hover{
     color: var(--accent-color);
     background: #fff;
@@ -79,6 +89,12 @@
 .delete-form__wrap{
     margin-top: 20px;
     text-align: right;
+}
+@media screen and (max-width: 768px){
+    .delete-form__wrap{
+        text-align: center;
+        margin-top: 30px;
+    }
 }
 .delete-form__button{
     display: inline-block;
@@ -93,6 +109,12 @@
     border-radius: 5px;
     border: 1px solid var(--accent-color);
     transition: .3s all ease;
+}
+@media screen and (max-width: 768px){
+    .delete-form__button{
+        width: 100%;
+        max-width: 300px;
+    }
 }
 .delete-form__button:hover{
     color: var(--accent-color);

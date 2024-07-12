@@ -263,7 +263,7 @@
     text-decoration: underline;
     transform: .3s all ease;
 }
-@media screen and (max-width: 767px){
+@media screen and (max-width: 768px){
     .edit-review__button,
     .remove-review__button{
         font-size: 14px;
@@ -279,7 +279,7 @@
     padding: 0 0.3em 0 0;
     line-height: 1;
 }
-@media screen and (max-width: 767px){
+@media screen and (max-width: 768px){
     .my-review__stars{
         font-size: 22px;
     }

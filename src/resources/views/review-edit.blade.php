@@ -90,7 +90,7 @@
                         </div>
                     </div>
                     <div class="review-form__button-wrap">
-                        <button class="review-form__button" type="submit">口コミを編集</button>
+                        <button class="review-form__button" type="submit">口コミを更新</button>
                     </div>
                 </form>
             </div>
