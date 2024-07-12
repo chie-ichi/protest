@@ -28,6 +28,7 @@ Auth::routes(['verify' => true]);
 Route::get('/', [RestaurantController::class, 'index']);
 Route::post('/', [RestaurantController::class, 'search']);
 Route::get('/detail/{id}', [RestaurantController::class, 'detail'])->name('detail');
+Route::get('/review-archive/{id}', [ReviewController::class, 'reviewArchive']);
 
 Route::get('/register', [UserController::class, 'getRegister']);
 Route::post('/register', [UserController::class, 'postRegister']);
@@ -46,6 +47,9 @@ Route::middleware(['verified'])->group(function () {
     Route::get('/review', [ReviewController::class, 'review']);
     Route::post('/add-review', [ReviewController::class, 'addReview']);
     Route::post('/charge', [StripeController::class, 'charge'])->name('stripe.charge');
+    Route::post('/remove-review', [ReviewController::class, 'removeReview']);
+    Route::get('/edit-review', [ReviewController::class, 'editReview']);
+    Route::post('/update-review', [ReviewController::class, 'updateReview']);
 });
 
 Route::get('/admin/login', [AdministratorController::class, 'getLogin']);
@@ -54,6 +58,7 @@ Route::post('/admin/login', [AdministratorController::class, 'postLogin']);
 Route::middleware(['auth.admin'])->group(function () {
     Route::post('/admin/logout', [AdministratorController::class, 'logout']);
     Route::get('/admin', [AdministratorController::class, 'index']);
+    Route::post('/admin/remove-review', [ReviewController::class, 'removeReviewAdmin']);
 });
 
 Route::post('/owner/register', [OwnerController::class, 'postRegister']);

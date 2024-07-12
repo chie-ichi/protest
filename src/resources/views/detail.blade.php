@@ -14,7 +14,7 @@
         <div class="detail__contents">
             <div class="info">
                 <div class="info__heading">
-                    <a href="/" type="button" class="info__btn-back" onClick="history.back(); return false;">&lt;</a>
+                    <a href="/" type="button" class="info__btn-back">&lt;</a>
                     <h1 class="info__title">{{ $restaurant->name }}</h1>
                 </div>
                 <div class="info__photo">
@@ -24,8 +24,10 @@
                     <li class="info__tag-item">{{ $restaurant->getArea()}}</li>
                     <li class="info__tag-item">{{ $restaurant->getCategory() }}</li>
                 </ul>
-                <p class="info__description">{{ $restaurant->description }}</p>
+                <p class="info__description">{!! nl2br(e($restaurant->description)) !!}</p>
+                
                 @auth
+                @if(empty($my_review))
                 <div class="review-form__wrap">
                     <form action="/review" class="review-form" method="get">
                         <input type="hidden" name="user_id" class="review-form__hidden" value="{{ Auth::user()->id }}">
@@ -35,6 +37,53 @@
                         </div>
                     </form>
                 </div>
+                @endif
+                @endauth
+
+                @if($restaurant->getReviews())
+                <div class="all-review">
+                    <a href="/review-archive/{{ $restaurant->id }}" class="all-review__button">全ての口コミ情報</a>
+                    </form>
+                </div>
+                @endif
+
+                @auth
+                @if(!empty($my_review))
+                <div class="my-review">
+                    <div class="my-review__form-wrap">
+                        <div class="edit-review">
+                            <form action="/edit-review" method="get">
+                                <input type="hidden" name="id" class="remove-review__hidden" value="{{ $my_review->id }}">
+                                <button class="edit-review__button" type="submit">口コミを編集</button>
+                            </form>
+                        </div>
+                        <div class="remove-review">
+                            <form action="/remove-review" method="post">
+                                @csrf
+                                <input type="hidden" name="id" class="remove-review__hidden" value="{{ $my_review->id }}">
+                                <button class="remove-review__button" type="submit">口コミを削除</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="my-review__contents">
+                        <div class="my-review__stars-wrap">
+                            @for($i = 1; $i <= 5; $i++)
+                            @if($my_review->stars >= $i)
+                            <span class="my-review__stars my-review__stars-on">★</span>
+                            @else
+                            <span class="my-review__stars my-review__stars-off">★</span>
+                            @endif
+                            @endfor
+                        </div>
+                        <p class="my-review__comment">{!! nl2br(e($my_review->comment)) !!}</p>
+                        @if($my_review->photo)
+                        <div class="my-review__photo-wrap">
+                            <img src="{{ $my_review->photo }}" alt="" class="my-review__photo">
+                        </div>
+                        @endif
+                    </div>
+                </div>
+                @endif
                 @endauth
             </div>
             <div class="reservation">
@@ -112,36 +161,6 @@
                         <button class="reservation-form__button" type="submit">予約する</button>
                     </form>
                 </div>
-            </div>
-        </div>
-
-        <div class="reviews">
-            <h3 class="reviews__title">レビュー一覧</h3>
-            <div class="reviews-list__wrapper">
-                @if($reviews->isEmpty())
-                <p class="reviews-list__not-found">レビューがまだありません</p>
-                @else
-                <ul class="reviews-list">
-                @foreach($reviews as $review)
-                <li class="reviews-list__item">
-                    <div class="reviews-list__user">
-                        <img class="reviews-list__user-icon" alt="user" src="{{ asset('img/icon-user.svg') }}">
-                        <p class="reviews-list__user-name">{{ $review->getUser() }}</p>
-                    </div>
-                    <div class="reviews-list__stars-wrap">
-                        @for($i = 1; $i <= 5; $i++)
-                        @if($review->stars >= $i)
-                        <span class="reviews-list__stars reviews-list__stars-on">★</span>
-                        @else
-                        <span class="reviews-list__stars reviews-list__stars-off">☆</span>
-                        @endif
-                        @endfor
-                    </div>
-                    <p class="reviews-list__comment">{{ $review->comment }}</p>
-                </li>
-                @endforeach
-                </ul>
-                @endif
             </div>
         </div>
     </div>

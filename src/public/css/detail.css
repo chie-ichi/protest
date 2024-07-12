@@ -67,6 +67,8 @@
 .info__photo-img{
     width: 100%;
     margin-bottom: 30px;
+    aspect-ratio: 2;
+    object-fit: cover;
 }
 .info__tag{
     display: flex;
@@ -120,7 +122,6 @@
 }
 .reservation-form__select-wrap{
     width: 100%;
-    max-width: 490px;
     position: relative;
 }
 @media screen and (max-width: 768px){
@@ -157,7 +158,6 @@
     border-radius: 5px;
     background: #5580f7;
     width: 100%;
-    max-width: 470px;
     font-size: 16px;
     margin-top: 20px;
     padding: 16px 20px;
@@ -210,51 +210,6 @@
     font-size: 14px;
 }
 
-.reviews{
-    padding: 0 0 80px;
-}
-.reviews__title{
-    font-size: 24px;
-    font-weight: bold;
-    line-height: 1.2;
-    margin-bottom: 20px;
-}
-.reviews-list__wrapper{
-    height: 300px;
-    overflow: auto;
-}
-.reviews-list{
-    background: #fff;
-    padding: 0 20px;
-}
-.reviews-list__item{
-    padding: 20px 0;
-    border-bottom: 1px solid #ccc;
-}
-.reviews-list__item:last-child{
-    border-bottom: none;
-}
-.reviews-list__user{
-    display: flex;
-    justify-content: flex-start;
-}
-.reviews-list__user-icon{
-    width: 20px;
-    height: auto;
-    display: inline-block;
-    margin-right: 5px;
-}
-.reviews-list__user-name{
-    font-size: 14px;
-}
-.reviews-list__stars-wrap{
-    margin-bottom: 0.5em;
-}
-.reviews-list__stars{
-    font-size: 20px;
-    color: #ffa41c;
-}
-
 .review-form__wrap{
     margin-top: 30px;
 }
@@ -265,4 +220,79 @@
 }
 .review-form__button:hover{
     color: var(--accent-color);
+}
+
+.all-review{
+    margin: 50px 0 20px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #ccc;
+}
+.all-review__button{
+    width: 100%;
+    height: 50px;
+    font-size: 18px;
+    color: #fff;
+    background: #5580f7;
+    border: 1px solid #5580f7;
+    line-height: 1;
+    padding: 0.5em 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    transform: .3s all ease;
+}
+.all-review__button:hover{
+    background: #fff;
+    color: #5580f7;
+}
+.my-review{
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 30px;
+}
+.my-review__form-wrap{
+    display: flex;
+    justify-content: flex-end;
+    gap: 0 16px;
+    margin-bottom: 30px;
+}
+.edit-review__button,
+.remove-review__button{
+    font-size: 16px;
+    text-decoration: underline;
+    transform: .3s all ease;
+}
+@media screen and (max-width: 767px){
+    .edit-review__button,
+    .remove-review__button{
+        font-size: 14px;
+    }
+}
+.edit-review__button:hover,
+.remove-review__button:hover{
+    color: var(--accent-color);
+}
+.my-review__stars{
+    color: #cccccc;
+    font-size: 28px;
+    padding: 0 0.3em 0 0;
+    line-height: 1;
+}
+@media screen and (max-width: 767px){
+    .my-review__stars{
+        font-size: 22px;
+    }
+}
+.my-review__stars-on{
+    color: var(--accent-color);
+}
+.my-review__comment{
+    margin-top: 10px;
+}
+.my-review__photo-wrap{
+    margin-top: 16px;
+}
+.my-review__photo{
+    width: 200px;
 }

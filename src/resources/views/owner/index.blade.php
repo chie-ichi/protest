@@ -174,8 +174,8 @@
                         <th class="restaurant-form__table-heading">写真</th>
                         <td class="restaurant-form__table-data">
                             <div class="restaurant-form__photo-wrap">
-                                <img src="{{ asset($restaurant->photo) }}" alt="{{ $restaurant->name }}" class="restaurant-form__photo restaurant-form__photo--current">
-                                <img src="" alt="プレビュー画像" class="restaurant-form__photo restaurant-form__photo--preview" style="display: none;"/>
+                                <img src="{{ asset($restaurant->photo) }}" alt="{{ $restaurant->name }}" class="restaurant-form__photo restaurant-form__photo--current photo-current">
+                                <img src="" alt="プレビュー画像" class="restaurant-form__photo restaurant-form__photo--preview photo-preview" style="display: none;"/>
                             </div>
                             <input type="file" name="photo_file" class="reservation-form__input-file" onchange="previewImage(event)" />
                             <div class="reservation-form__error">
@@ -188,7 +188,7 @@
                     <tr class="restaurant-form__table-row">
                         <th class="restaurant-form__table-heading">説明文</th>
                         <td class="restaurant-form__table-data">
-                            <textarea name="description" class="restaurant-form__textarea">{{ $restaurant->description }}</textarea>
+                            <textarea name="description" class="restaurant-form__textarea">{!! nl2br(e($restaurant->description)) !!}</textarea>
                             <div class="reservation-form__error">
                                 @error('description')
                                 {{ $message }}
@@ -264,29 +264,5 @@
         </div>
     </div>
 </div>
-
-<script>
-    function previewImage(event) {
-        const file = event.target.files[0];
-        const reader = new FileReader();
-        const form = event.target.closest('form');
-        const preview = form.querySelector('.restaurant-form__photo--preview');
-        const current = form.querySelector('.restaurant-form__photo--current');
-
-        reader.onload = function() {
-            if (preview) {
-                preview.src = reader.result;
-                preview.style.display = 'block';
-            }
-            if (current) {
-                current.style.display = 'none';
-            }
-        };
-
-        if (file) {
-            reader.readAsDataURL(file);
-        }
-    }
-</script>
 @endsection
 

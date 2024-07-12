@@ -54,6 +54,10 @@ class Restaurant extends Model
         return $this->hasMany(Review::class);
     }
 
+    public function getReviews(){
+        return $this->review();
+    }
+
     public function owner(){
         return $this->belongsTo(Owner::class);
     }

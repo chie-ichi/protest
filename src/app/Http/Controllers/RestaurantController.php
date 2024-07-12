@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Restaurant;
 use App\Models\Area;
 use App\Models\Category;
@@ -35,10 +36,16 @@ class RestaurantController extends Controller
     public function detail($restaurant_id)
     {
         $restaurant = Restaurant::find($restaurant_id);
-        $reviews = Review::where('restaurant_id', $restaurant_id)
-            ->get();
+        $user_id = Auth::id();
+        $my_review = null;
 
-        return view('detail', compact('restaurant', 'reviews'));
+        if($user_id) {
+            $my_review = Review::where('user_id', $user_id)
+                        ->where('restaurant_id', $restaurant_id)
+                        ->first();
+        }
+
+        return view('detail', compact('restaurant', 'my_review'));
     }
 
     public function add(RestaurantRequest $request)

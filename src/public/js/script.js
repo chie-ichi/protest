@@ -38,10 +38,33 @@ if($('select[name=\"number\"]').length) {
     });
 }
 
+/* preview image */
+function previewImage(event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    const form = event.target.closest('form');
+    const preview = form.querySelector('.photo-preview');
+    const current = form.querySelector('.photo-current');
+
+    reader.onload = function() {
+        if (preview) {
+            preview.src = reader.result;
+            preview.style.display = 'inline-block';
+        }
+        if (current) {
+            current.style.display = 'none';
+        }
+    };
+
+    if (file) {
+        reader.readAsDataURL(file);
+    }
+}
+
 /* upload image */
 $('#uploadArea').on('dragover', function (event) {
 	event.preventDefault();
-	this.style.backgroundColor = '#80ff80';
+	this.style.backgroundColor = '#e2e8fd';
 });
 
 $('#uploadArea').on('dragleave', function () {
@@ -58,8 +81,28 @@ $('#uploadArea').on('drop', function (event) {
     }
 });
 
-$('#fileInput').on('change', function () {
-	$('#fileName').html(this.files[0].name);
+$('#fileInput').on('change', function (event) {
+    previewImage(event);
+    /*
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    const form = event.target.closest('form');
+    const preview = form.querySelector('.photo-preview');
+    const current = form.querySelector('.photo-current');
+
+    reader.onload = function() {
+        if (preview) {
+            preview.src = reader.result;
+            preview.style.display = 'inline-block';
+        }
+        if (current) {
+            current.style.display = 'none';
+        }
+    };
+
+    if (file) {
+        reader.readAsDataURL(file);
+    } */
 });
 
 /* count text */
@@ -67,16 +110,18 @@ $(function() {
     const $target = $('#textarea-count-target');
     const $result = $('#textarea-count-result');
 
-    function countText() {
-        const len = $target.val().length;
-        $result.text(len);
-    }
+    if($target.length) {
+        function countText() {
+            const len = $target.val().length;
+            $result.text(len);
+        }
 
-    // ページ読み込み直後に文字数をカウント
-    countText();
-
-    // inputイベントが発生したときに文字数をカウント
-    $target.on('input', () => {
+        // ページ読み込み直後に文字数をカウント
         countText();
-    });
+
+        // inputイベントが発生したときに文字数をカウント
+        $target.on('input', () => {
+            countText();
+        });
+    }
 });

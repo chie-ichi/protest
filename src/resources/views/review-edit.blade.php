@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('title')
-<title>Review | Rese</title>
+<title>Edit Review | Rese</title>
 @endsection
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/review.css') }}">
+<link rel="stylesheet" href="{{ asset('css/review-edit.css') }}">
 @endsection
 
 @section('content')
@@ -13,11 +13,11 @@
     <div class="inner review__inner">
         <div class="review__contents-wrap">
             <div class="review__form">
-                <form action="/add-review" class="review-form" method="post" enctype="multipart/form-data" >
+                <form action="/update-review" class="review-form" method="post" enctype="multipart/form-data" >
                     @csrf
                     <div class="review__form-upper">
                         <div class="review__head">
-                            <h1 class="review__title">今回のご利用はいかがでしたか？</h1>
+                            <h1 class="review__title">このお店の評価を編集しますか？</h1>
                             <div class="restaurant-card">
                                 <div class="restaurant-card__photo">
                                     <img src="{{ $restaurant->photo }}" alt="{{ $restaurant->name }}">
@@ -45,16 +45,17 @@
                             </div>
                         </div>
                         <div class="review__body">
-                            <input type="hidden" name="user_id" class="review-form__hidden" value="{{ $user_id }}">
+                            <input type="hidden" name="id" class="review-form__hidden" value="{{ $review->id }}">
+                            <input type="hidden" name="user_id" class="review-form__hidden" value="{{ $review->user_id }}">
                             <input type="hidden" name="restaurant_id" class="review-form__hidden" value="{{ $restaurant->id }}">
                             <div class="review-form__item">
                                 <h2 class="review-form__item-title">体験を評価してください</h2>
                                 <div class="review-form__stars">
-                                    <input id="star05" type="radio" name="stars" value="5"  class="review-form__stars-radio" @if(old('stars') == '5') checked @endif><label for="star05"  class="review-form__stars-label">★</label>
-                                    <input id="star04" type="radio" name="stars" value="4" class="review-form__stars-radio" @if(old('stars') == '4') checked @endif><label for="star04" class="review-form__stars-label">★</label>
-                                    <input id="star03" type="radio" name="stars" value="3" class="review-form__stars-radio" @if(old('stars') == '3') checked @endif><label for="star03" class="review-form__stars-label">★</label>
-                                    <input id="star02" type="radio" name="stars" value="2" class="review-form__stars-radio" @if(old('stars') == '2') checked @endif><label for="star02" class="review-form__stars-label">★</label>
-                                    <input id="star01" type="radio" name="stars" value="1" class="review-form__stars-radio" @if(old('stars') == '1') checked @endif><label for="star01" class="review-form__stars-label">★</label>
+                                    <input id="star05" type="radio" name="stars" value="5"  class="review-form__stars-radio" @if($review->stars == '5') checked @endif><label for="star05"  class="review-form__stars-label">★</label>
+                                    <input id="star04" type="radio" name="stars" value="4" class="review-form__stars-radio" @if($review->stars == '4') checked @endif><label for="star04" class="review-form__stars-label">★</label>
+                                    <input id="star03" type="radio" name="stars" value="3" class="review-form__stars-radio" @if($review->stars == '3') checked @endif><label for="star03" class="review-form__stars-label">★</label>
+                                    <input id="star02" type="radio" name="stars" value="2" class="review-form__stars-radio" @if($review->stars == '2') checked @endif><label for="star02" class="review-form__stars-label">★</label>
+                                    <input id="star01" type="radio" name="stars" value="1" class="review-form__stars-radio" @if($review->stars == '1') checked @endif><label for="star01" class="review-form__stars-label">★</label>
                                 </div>
                                 <div class="review-form__error">
                                     @error('stars')
@@ -64,7 +65,7 @@
                             </div>
                             <div class="review-form__item">
                                 <h2 class="review-form__item-title">口コミを投稿</h2>
-                                <textarea name="comment" class="review-form__textarea" placeholder="カジュアルな夜のお出かけにおすすめのスポット" id="textarea-count-target" maxlength="400">{{ old('comment') }}</textarea>
+                                <textarea name="comment" class="review-form__textarea" placeholder="カジュアルな夜のお出かけにおすすめのスポット" id="textarea-count-target" maxlength="400">{{ $review->comment }}</textarea>
                                 <div class="review-form__error">
                                     @error('comment')
                                     {{ $message }}
@@ -76,8 +77,11 @@
                                 <h2 class="review-form__item-title">画像の追加</h2>
                                 <div class="upload-area" id="uploadArea">
                                     <div class="upload-area__txt-wrap">
-                                        <p class="upload-area__txt">クリックして写真を追加</p>
+                                        <p class="upload-area__txt">クリックして写真を編集</p>
                                         <p class="upload-area__txt--small">またはドラッグアンドドロップ</p>
+                                        @if($review->photo)
+                                        <img src="{{ asset($review->photo) }}" alt="{{ $restaurant->name }}" class="upload-area__preview photo-current">
+                                        @endif
                                         <img id="preview" src="" alt="プレビュー画像" style="display: none;" class="upload-area__preview photo-preview">
                                     </div>
                                     <input type="file" id="fileInput" name="photo_file" class="review-form__file">
@@ -86,7 +90,7 @@
                         </div>
                     </div>
                     <div class="review-form__button-wrap">
-                        <button class="review-form__button" type="submit">口コミを投稿</button>
+                        <button class="review-form__button" type="submit">口コミを編集</button>
                     </div>
                 </form>
             </div>
