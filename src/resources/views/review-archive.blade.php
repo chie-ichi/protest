@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-<title>{{ $restaurant->name }}のレビュー一覧 | Rese</title>
+<title>{{ $restaurant->name }}の口コミ一覧 | Rese</title>
 @endsection
 
 @section('css')
@@ -11,10 +11,10 @@
 @section('content')
 <div class="reviews">
     <div class="inner reviews__inner">
-        <h1 class="reviews__title">{{ $restaurant->name }}のレビュー一覧</h1>
+        <h1 class="reviews__title">{{ $restaurant->name }}の口コミ一覧</h1>
         <div class="reviews-list__wrapper">
             @if($reviews->isEmpty())
-            <p class="reviews-list__not-found">レビューがまだありません</p>
+            <p class="reviews-list__not-found">口コミがまだありません</p>
             @else
             <ul class="reviews-list">
             @foreach($reviews as $review)

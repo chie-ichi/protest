@@ -49,7 +49,7 @@
                                 <input type="hidden" name="user_id" class="review-form__hidden" value="{{ $reservation->user_id }}">
                                 <input type="hidden" name="restaurant_id" class="review-form__hidden" value="{{ $reservation->restaurant_id }}">
                                 <div class="review-form__button-wrap">
-                                    <button class="review-form__button" type="submit">レビューを書く</button>
+                                    <button class="review-form__button" type="submit">口コミを書く</button>
                                 </div>
                             </form>
                         </div>
