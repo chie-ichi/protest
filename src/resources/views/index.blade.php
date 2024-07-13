@@ -14,24 +14,36 @@
         <div class="search">
             <form action="/" class="search-form" method="post">
                 @csrf
-                <div class="search-form__item">
-                    <div class="search-form__item-select-wrap">
-                        <select name="area_id" class="search-form__item-select search-form__item-select--area" onchange="submit(this.form)">
-                            <option value="">All areas</option>
-                            @foreach($areas as $area)
-                            <option value="{{ $area['id'] }}" @if ($area['id'] == request()->input('area_id')) selected @endif>{{ $area['name'] }}</option>
-                            @endforeach
-                        </select>
+                <div class="search-form__content">
+                    <div class="sort">
+                        <div class="sort__select-wrap">
+                            <label class="sort__label">並び替え: </label>
+                            <select name="sort" class="sort__select">
+                                <option value="random" @if ("random" == request()->input('sort')) selected @endif>ランダム</option>
+                                <option value="rating-high" @if ("rating-high" == request()->input('sort')) selected @endif>評価が高い順</option>
+                                <option value="rating-low" @if ("rating-low" == request()->input('sort')) selected @endif>評価が低い順</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="search-form__item-select-wrap">
-                        <select name="category_id" class="search-form__item-select search-form__item-select--category" onchange="submit(this.form)">
-                            <option value="">All genre</option>
-                            @foreach($categories as $category)
-                                <option value="{{ $category['id'] }}" @if ($category['id'] == request()->input('category_id')) selected @endif>{{ $category['name'] }}</option>
-                            @endforeach
-                        </select>
+                    <div class="search-form__item">
+                        <div class="search-form__item-select-wrap">
+                            <select name="area_id" class="search-form__item-select search-form__item-select--area" onchange="submit(this.form)">
+                                <option value="">All areas</option>
+                                @foreach($areas as $area)
+                                <option value="{{ $area['id'] }}" @if ($area['id'] == request()->input('area_id')) selected @endif>{{ $area['name'] }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="search-form__item-select-wrap">
+                            <select name="category_id" class="search-form__item-select search-form__item-select--category" onchange="submit(this.form)">
+                                <option value="">All genre</option>
+                                @foreach($categories as $category)
+                                    <option value="{{ $category['id'] }}" @if ($category['id'] == request()->input('category_id')) selected @endif>{{ $category['name'] }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <input type="text" name="keyword" class="search-form__item-text" placeholder="Search ..." value="{{ request()->input('keyword') }}" onchange="submit(this.form)">
                     </div>
-                    <input type="text" name="keyword" class="search-form__item-text" placeholder="Search ..." value="{{ request()->input('keyword') }}" onchange="submit(this.form)">
                 </div>
             </form>
         </div>

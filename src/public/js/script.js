@@ -83,26 +83,6 @@ $('#uploadArea').on('drop', function (event) {
 
 $('#fileInput').on('change', function (event) {
     previewImage(event);
-    /*
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    const form = event.target.closest('form');
-    const preview = form.querySelector('.photo-preview');
-    const current = form.querySelector('.photo-current');
-
-    reader.onload = function() {
-        if (preview) {
-            preview.src = reader.result;
-            preview.style.display = 'inline-block';
-        }
-        if (current) {
-            current.style.display = 'none';
-        }
-    };
-
-    if (file) {
-        reader.readAsDataURL(file);
-    } */
 });
 
 /* count text */
@@ -124,4 +104,25 @@ $(function() {
             countText();
         });
     }
+});
+
+/* 店舗情報ソート順設定要プルダウン */
+$(document).ready(function() {
+    function updateSortSelectLabel() {
+        // 選択されたオプションを取得
+        let selectedOption = $('.sort__select option:selected');
+        let originalText = selectedOption.text();
+
+        // ラベルを更新
+        $('#sortLabel').text('表示順: ' + originalText);
+    }
+
+    updateSortSelectLabel();
+
+    $('.sort__select').change(function() {
+        updateSortSelectLabel();
+
+        // フォームを送信
+        $(this).closest('form').submit();
+    });
 });

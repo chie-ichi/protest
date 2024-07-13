@@ -17,6 +17,9 @@ class RestaurantController extends Controller
         $restaurants = Restaurant::with('area')->get();
         $areas = Area::all();
         $categories = Category::all();
+
+        $restaurants = $restaurants->shuffle();
+
         return view('index', compact('restaurants', 'areas', 'categories'));
     }
 
@@ -29,6 +32,40 @@ class RestaurantController extends Controller
             ->get();
         $areas = Area::all();
         $categories = Category::all();
+
+        switch($request->sort){
+            case "random":
+                $restaurants = $restaurants->shuffle();
+                break;
+            case "rating-high":
+                $restaurants = $restaurants->sortByDesc(function ($restaurant) {
+                    $review_count = $restaurant->getReviews()->count();
+                    if($review_count > 0) {
+                        //口コミが存在する場合は評価の平均値でソート
+                        $review_average = $restaurant->getReviews()->sum('stars') / $review_count;
+                        return [$review_average, $review_count];
+                    } else {
+                        //口コミが存在しない場合はソートの最後
+                        return [PHP_INT_MIN, 0];
+                    }
+                });
+                break;
+            case "rating-low":
+                $restaurants = $restaurants->sortBy(function ($restaurant) {
+                    $review_count = $restaurant->getReviews()->count();
+                    if($review_count > 0) {
+                        //口コミが存在する場合は評価の平均値でソート
+                        $review_average = $restaurant->getReviews()->sum('stars') / $review_count;
+                        return [$review_average, $review_count];
+                    } else {
+                        //口コミが存在しない場合はソートの最後
+                        return [PHP_FLOAT_MAX, 0];
+                    }
+                });
+                break;
+            default:
+                break;
+        }
 
         return view('index', compact('restaurants', 'areas', 'categories'));
     }
