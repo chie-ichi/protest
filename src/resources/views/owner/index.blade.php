@@ -188,7 +188,7 @@
                     <tr class="restaurant-form__table-row">
                         <th class="restaurant-form__table-heading">説明文</th>
                         <td class="restaurant-form__table-data">
-                            <textarea name="description" class="restaurant-form__textarea">{!! nl2br(e($restaurant->description)) !!}</textarea>
+                            <textarea name="description" class="restaurant-form__textarea">{{ $restaurant->description }}</textarea>
                             <div class="reservation-form__error">
                                 @error('description')
                                 {{ $message }}
