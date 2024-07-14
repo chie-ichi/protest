@@ -305,7 +305,7 @@ DB_PASSWORD=root
 | photo_url | 画像URL：jpeg,jpg,pngのみ | https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/ramen.jpg|
 | owner_id | 店舗代表者ID：登録済みの店舗代表者のIDを整数で指定 | 1 |
 
-### CSVファイル例
+### CSVファイル内容例
 ```
 name,area_name,category_name,description,photo_url,owner_id
 ラーメン福,大阪府,ラーメン,こだわりの素材を使用した自家製の麺と、じっくり煮込んだ特製スープが自慢のラーメン店です。醤油、味噌、塩など多彩な味わいをお楽しみいただけます。心温まる一杯を提供するため、毎日丹精込めてラーメンを作り上げています。居心地の良い空間で、至福のひとときをお過ごしください。皆様のご来店を心よりお待ちしております。,https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/ramen.jpg,2
@@ -320,10 +320,10 @@ name,area_name,category_name,description,photo_url,owner_id
 Mailtrap (https://mailtrap.io/) を使用したテスト送信でのみ動作確認済みです。
 
 ### 決済機能について
-Stripeのテスト環境およびテストカードを用いて動作確認済みです。
-Stripeのテストカードの情報については以下をご参照ください。
+Stripeのテスト環境およびテストカードを用いて動作確認済みです。  
+Stripeのテストカードの情報については以下をご参照ください。  
 https://docs.stripe.com/testing?locale=ja-JP
 
 ### AWSについて
-今回の入会テストにつきまして、AWSへのデプロイは行っておりません。
+今回の入会テストにつきまして、AWSへのデプロイは行っておりません。  
 動作確認はローカル環境で行っていただけると幸いです。
