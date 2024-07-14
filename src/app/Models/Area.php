@@ -14,4 +14,10 @@ class Area extends Model
     public function restaurant(){
         return $this->hasMany(Restaurant::class);
     }
+
+    public static function getIdByName($name)
+    {
+        $area = self::where('name', $name)->first();
+        return $area ? $area->id : null;
+    }
 }

@@ -59,6 +59,7 @@ Route::middleware(['auth.admin'])->group(function () {
     Route::post('/admin/logout', [AdministratorController::class, 'logout']);
     Route::get('/admin', [AdministratorController::class, 'index']);
     Route::post('/admin/remove-review', [ReviewController::class, 'removeReviewAdmin']);
+    Route::post('/upload-csv', [RestaurantController::class, 'uploadCsv']);
 });
 
 Route::post('/owner/register', [OwnerController::class, 'postRegister']);

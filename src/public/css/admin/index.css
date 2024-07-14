@@ -111,10 +111,18 @@
     font-size: 12px;
 }
 
+.owner{
+    margin-bottom: 50px;
+}
 .owner-table{
     width: 100%;
     background: #fff;
     border-collapse: collapse;
+}
+@media screen and (max-width: 768px){
+    .owner-table{
+        font-size: 14px;
+    }
 }
 .owner-table__heading,
 .owner-table__data{
@@ -125,4 +133,31 @@
     background: var(--accent-color);
     color: #fff;
     text-align: center;
+}
+
+.upload__lead{
+    margin-bottom: 20px;
+}
+@media screen and (max-width: 768px){
+    .upload__lead{
+        font-size: 14px;
+    }
+}
+.upload-form__button-wrap{
+    margin-top: 15px;
+}
+.upload-form__button{
+    appearance: none;
+    background: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    color: #fff;
+    border-radius: 5px;
+    line-height: 1;
+    padding: 0.5em 1em;
+    font-size: 16px;
+    transition: .3s all ease;
+}
+.upload-form__button:hover{
+    background: #fff;
+    color: var(--accent-color);
 }

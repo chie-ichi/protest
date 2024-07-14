@@ -106,6 +106,22 @@
             </table>
             @endif
         </div>
+        <div class="upload">
+            <h2 class="section-title">店舗情報アップロード</h2>
+            <p class="upload__lead">店舗情報が入力されたCSVファイルをアップロードしてください。</p>
+            <form action="/upload-csv" class="upload-form" method="post" enctype="multipart/form-data">
+                @csrf
+                <input type="file" name="csv" class="upload-form__file" id="csvFile">
+                <div class="form__error">
+                @error('csv')
+                {{ $message }}
+                @enderror
+                </div>
+                <div class="upload-form__button-wrap">
+                    <button type="submit" class="upload-form__button">アップロード</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 @endsection

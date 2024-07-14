@@ -14,4 +14,10 @@ class Category extends Model
     public function restaurant(){
         return $this->hasMany(Restaurant::class);
     }
+
+    public static function getIdByName($name)
+    {
+        $category = self::where('name', $name)->first();
+        return $category ? $category->id : null;
+    }
 }

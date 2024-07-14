@@ -27,7 +27,7 @@
                 <p class="info__description">{!! nl2br(e($restaurant->description)) !!}</p>
                 
                 @auth
-                @if(empty($my_review))
+                @if(empty($myReview))
                 <div class="review-form__wrap">
                     <form action="/review" class="review-form" method="get">
                         <input type="hidden" name="user_id" class="review-form__hidden" value="{{ Auth::user()->id }}">
@@ -48,19 +48,19 @@
                 @endif
 
                 @auth
-                @if(!empty($my_review))
+                @if(!empty($myReview))
                 <div class="my-review">
                     <div class="my-review__form-wrap">
                         <div class="edit-review">
                             <form action="/edit-review" method="get">
-                                <input type="hidden" name="id" class="remove-review__hidden" value="{{ $my_review->id }}">
+                                <input type="hidden" name="id" class="remove-review__hidden" value="{{ $myReview->id }}">
                                 <button class="edit-review__button" type="submit">口コミを編集</button>
                             </form>
                         </div>
                         <div class="remove-review">
                             <form action="/remove-review" method="post">
                                 @csrf
-                                <input type="hidden" name="id" class="remove-review__hidden" value="{{ $my_review->id }}">
+                                <input type="hidden" name="id" class="remove-review__hidden" value="{{ $myReview->id }}">
                                 <button class="remove-review__button" type="submit">口コミを削除</button>
                             </form>
                         </div>
@@ -68,17 +68,17 @@
                     <div class="my-review__contents">
                         <div class="my-review__stars-wrap">
                             @for($i = 1; $i <= 5; $i++)
-                            @if($my_review->stars >= $i)
+                            @if($myReview->stars >= $i)
                             <span class="my-review__stars my-review__stars-on">★</span>
                             @else
                             <span class="my-review__stars my-review__stars-off">★</span>
                             @endif
                             @endfor
                         </div>
-                        <p class="my-review__comment">{!! nl2br(e($my_review->comment)) !!}</p>
-                        @if($my_review->photo)
+                        <p class="my-review__comment">{!! nl2br(e($myReview->comment)) !!}</p>
+                        @if($myReview->photo)
                         <div class="my-review__photo-wrap">
-                            <img src="{{ $my_review->photo }}" alt="" class="my-review__photo">
+                            <img src="{{ $myReview->photo }}" alt="" class="my-review__photo">
                         </div>
                         @endif
                     </div>
