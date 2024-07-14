@@ -289,7 +289,7 @@ DB_PASSWORD=root
 | 店舗代表者19 | owner19@test.jp | password19 |
 | 店舗代表者20 | owner20@test.jp | password20 |
 
-## 管理者アップロード用CSVファイルについて
+## CSV登録機能用のCSVファイルデータについて
 
 ### 構成概要
 - 1行目はヘッダーとして"name,area_name,category_name,description,photo_url,owner_id"を入力
